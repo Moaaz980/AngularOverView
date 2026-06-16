@@ -1,0 +1,21 @@
+
+<div class="user-page">
+    <h4>Lista di tutti gli utenti</h4>
+    <button (click)="onClick()">Get Users</button>
+
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Username</th>  
+            <th>Email</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of utenti">
+                <td>{{ user.name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
