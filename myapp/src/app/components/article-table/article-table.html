@@ -2,7 +2,6 @@
 <div class="user-page">
     <h4 class="text-center text-xl font-bold m-5">All users</h4>
     <p-button label="Get" (onClick)="click()" class="flex flex-row justify-center" [disabled]="loadingValue | async" />
-
     <div class="card m-10 flex justify-center">
         <p-table [value]="utenti" class="w-3xl">
             <ng-template #header>
@@ -21,6 +20,4 @@
             </ng-template>
         </p-table>
     </div>
-
-
 </div>
