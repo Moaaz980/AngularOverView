@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArticleTable } from './article-table';
+import { ArticleTable } from './user-table';
 
 describe('ArticleTable', () => {
   let component: ArticleTable;

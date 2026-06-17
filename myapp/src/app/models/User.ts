@@ -1,5 +1,4 @@
 
-// interfacce che descrive i dati che mi arrivano dal Back end 
 export interface User {
     id: number;
     name: string;
