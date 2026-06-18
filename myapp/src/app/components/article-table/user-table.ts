@@ -28,6 +28,7 @@ export class UserTable {
   utentiOriginali = signal<User[]>([]);
   loadingValue!: Observable<boolean>;
   username = signal('');
+  utenteSelezionato?: User;
 
   constructor(private userService: UserService, private loadingService: LoadingService) { }
 
@@ -44,6 +45,17 @@ export class UserTable {
   onSearch() {
     this.utenti.set(this.filterUsers());
     this.username.set('');
+  }
+
+  handleUserViewDetails(id: number) {
+    const user = this.utentiOriginali().find(
+      utente => utente.id === id
+    );
+
+    if (!user) {return;}
+
+    this.utenteSelezionato = user;
+    console.log(this.utenteSelezionato)
   }
 
   private getUsers(): void {

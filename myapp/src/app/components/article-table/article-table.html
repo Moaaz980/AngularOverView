@@ -20,6 +20,7 @@
                     <th>Name</th>
                     <th>Username</th>
                     <th>email</th>
+                    <th>Details</th>
                 </tr>
             </ng-template>
             <ng-template #body let-utente>
@@ -27,6 +28,9 @@
                 <td>{{ utente.name }}</td>
                 <td>{{ utente.username }}</td>
                 <td>{{ utente.email }}</td>
+                <td>
+                    <p-button label="View Details" (onClick)="handleUserViewDetails(utente.id)"/>
+                </td>
                </tr>
             </ng-template>
         </p-table>
