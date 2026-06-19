@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { UserDetails } from '../user-details/user-details';
 
 @Component({
   selector: 'app-article-table',
@@ -18,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     InputTextModule,
     FloatLabelModule,
-    FormsModule
+    FormsModule,
+    DialogModule , 
+    UserDetails
   ],
   templateUrl: './article-table.html',
   styleUrl: './article-table.css',
@@ -29,6 +33,7 @@ export class UserTable {
   loadingValue!: Observable<boolean>;
   username = signal('');
   utenteSelezionato?: User;
+  vis!: boolean;
 
   constructor(private userService: UserService, private loadingService: LoadingService) { }
 
@@ -47,15 +52,13 @@ export class UserTable {
     this.username.set('');
   }
 
-  handleUserViewDetails(id: number) {
-    const user = this.utentiOriginali().find(
-      utente => utente.id === id
-    );
+  handleUserViewDetails(usr: User) {
+    this.vis = true;
+    this.utenteSelezionato = usr;
+  }
 
-    if (!user) {return;}
-
-    this.utenteSelezionato = user;
-    console.log(this.utenteSelezionato)
+  closeModal() {
+    this.vis = false;
   }
 
   private getUsers(): void {
@@ -74,6 +77,9 @@ export class UserTable {
   private filterUsers() {
     return this.utentiOriginali().filter(utente => utente.username === this.username());
   }
+
+  
+
 
 
 

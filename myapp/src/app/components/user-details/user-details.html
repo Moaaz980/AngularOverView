@@ -1,0 +1,52 @@
+<p-dialog header="User Details" [modal]="true" [(visible)]="visible" [style]="{ width: '30rem' }" [draggable]="false"
+    [resizable]="false">
+
+    <div
+        class="bg-blue-500 rounded-full text-center font-bold px-4 py-4 w-[5rem] h-[5rem] flex justify-center items-center text-xl shadow-sm m-auto">
+        {{ firstLettersOfUsername }}
+    </div>
+
+    <div class="flex flex-col gap-4 justify-center items-center m-4">
+        <p>{{ selectedUser?.name }}</p>
+        <p>@{{ selectedUser?.name?.charAt(0)! + selectedUser?.username }}</p>
+    </div>
+
+    <!----<<<<<<<<<<<<<<<<<< CONTATTI UTENTE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+
+    <h3 class="font-bold text-lg mb-4">
+        User Information
+    </h3>
+
+    <div class="flex justify-start flex-col items-start gap-1 mb-3">
+        <div class="flex flex-row gap-2">
+            <label class="font-semibold">Identifier:</label>
+            <p>{{ selectedUser?.id }}</p>
+        </div>
+
+        <div class="flex flex-row gap-2">
+            <label class="font-semibold">Email:</label>
+            <p>{{ selectedUser?.email }}</p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <label class="font-semibold">Address:</label>
+            <div>
+                {{ selectedUser?.address?.street }} <br>
+                {{ selectedUser?.address?.suite }} <br>
+                {{ selectedUser?.address?.zipcode }}
+            </div>
+        </div>
+
+        <div class="flex flex-row gap-2">
+            <label class="font-semibold">Phone:</label>
+            <p>{{ selectedUser?.phone }}</p>
+        </div>
+    </div>
+
+    <p-button
+        label="Cancel"
+        severity="secondary"
+        (onClick)="onCancelButtonClicked()"
+        class="flex justify-end" />
+
+</p-dialog>
