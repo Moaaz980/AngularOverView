@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArticleTable } from './user-table';
+import { Themeicon } from './themeicon';
 
-describe('ArticleTable', () => {
-  let component: ArticleTable;
-  let fixture: ComponentFixture<ArticleTable>;
+describe('Themeicon', () => {
+  let component: Themeicon;
+  let fixture: ComponentFixture<Themeicon>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArticleTable],
+      imports: [Themeicon],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ArticleTable);
+    fixture = TestBed.createComponent(Themeicon);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

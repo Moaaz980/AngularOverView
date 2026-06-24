@@ -1,1 +1,4 @@
-<router-outlet />
+<div class="min-h-screen overflow-hidden" [ngClass]="globalThemeService.theme() === 'light' ? 'bg-white text-black' : 'bg-black'">
+    <app-themeicon class="text-sky-400"  />
+    <router-outlet />
+</div>

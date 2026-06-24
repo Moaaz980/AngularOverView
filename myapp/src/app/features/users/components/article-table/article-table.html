@@ -1,17 +1,21 @@
 <div class="user-page">
-    <h4 class="text-center text-xl font-bold m-5">All users</h4>
+    <h4 class="text-center text-xl font-bold mt-2">
+        All users
+    </h4>
 
     <p-button class="flex flex-row justify-center items-center" label="Get" (onClick)="click()"
         [disabled]="loadingValue | async" />
 
-
-    <div class="serach-section flex flex-col items-center justify-center gap-4 mt-9">
-        <p-floatlabel>
-            <input pInputText id="over_label" [(ngModel)]="username" autocomplete="off" />
-            <label for="over_label">Username</label>
-        </p-floatlabel>
-        <p-button label="Search" (onClick)="onSearch()" [disabled]="username() === '' ? true : false" />
+    <div class="card flex flex-wrap gap-4 justify-center static top-3 right-3">
+        <p-message *ngIf="notFound" severity="error" class="mt-9"
+            styleClass="border-l-4 border-red-500 bg-red-50 text-red-700">
+            {{ errorMessageVal }}
+        </p-message>
     </div>
+
+    <app-search-user [username]="username()" (usernameChange)="username.set($event)" (searchClicked)="onSearch($event)">
+    </app-search-user>
+
 
     <div class="card m-10 flex justify-center">
         <p-table [value]="utenti()" class="w-3xl">
@@ -21,6 +25,7 @@
                     <th>Username</th>
                     <th>email</th>
                     <th>Details</th>
+                    <th>Create User</th>
                 </tr>
             </ng-template>
             <ng-template #body let-utente>
@@ -31,13 +36,15 @@
                     <td>
                         <p-button label="View Details" (onClick)="handleUserViewDetails(utente)" />
                     </td>
+                    
+                    <td>
+                        <p-button label="Create User" />
+                    </td>
                 </tr>
             </ng-template>
         </p-table>
 
-        <app-user-details [visible]="vis" [selectedUser]="utenteSelezionato" (cancelClicked)="closeModal()"></app-user-details>
-
-
+        <app-user-details [visible]="vis" [selectedUser]="utenteSelezionato" (cancelClicked)="closeModal()">
+        </app-user-details>
     </div>
 </div>
-

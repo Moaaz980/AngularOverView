@@ -1,16 +1,19 @@
 import { LoadingService } from '../../services/loading-service';
 import { UserService } from '../../services/user-service';
-import { Component, computed, Signal, signal, SimpleChanges } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { User } from '../../models/User';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { UserDetails } from '../user-details/user-details';
+import { SearchUser } from '../search-user/search-user';
+import { MessageModule } from 'primeng/message';
+
 
 @Component({
   selector: 'app-article-table',
@@ -21,8 +24,10 @@ import { UserDetails } from '../user-details/user-details';
     InputTextModule,
     FloatLabelModule,
     FormsModule,
-    DialogModule , 
-    UserDetails
+    DialogModule,
+    UserDetails,
+    SearchUser , 
+    MessageModule
   ],
   templateUrl: './article-table.html',
   styleUrl: './article-table.css',
@@ -34,6 +39,9 @@ export class UserTable {
   username = signal('');
   utenteSelezionato?: User;
   vis!: boolean;
+  errorMessage = signal<string>('');
+  notFound: boolean = false;
+
 
   constructor(private userService: UserService, private loadingService: LoadingService) { }
 
@@ -47,8 +55,16 @@ export class UserTable {
   }
 
 
-  onSearch() {
-    this.utenti.set(this.filterUsers());
+  onSearch(name: string) {
+    const user = this.findUserByUsername(name)!;
+    if (!this.utentiOriginali().includes(user)) {      
+      this.notFound = true;
+      this.errorMessage.set('Utente non trovato');
+      this.setTimerForError();
+      this.username.set('');
+    }
+    this.username.set(name);
+    this.utenti.set(this.filterdUsers(name));
     this.username.set('');
   }
 
@@ -74,23 +90,24 @@ export class UserTable {
     });
   }
 
-  private filterUsers() {
-    return this.utentiOriginali().filter(utente => utente.username === this.username());
+  private filterdUsers(name: string) {
+    return this.utentiOriginali().filter(utente => utente.username === name);
   }
 
-  
+  private findUserByUsername(username: string) {
+    return this.utentiOriginali().find(utente => utente.username === username);
+  }
 
+  private setTimerForError() {
+    timer(1500).subscribe(() => {
+      this.errorMessage.set('');
+      this.notFound = false;
+    })
+  }
 
-
-
-
-
-
-
-
-
-
-
+   get errorMessageVal() {
+    return this.errorMessage();
+  }
 
 }
 

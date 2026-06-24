@@ -6,6 +6,7 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
+import Nora from '@primeuix/themes/nora';
 
 
 export const appConfig: ApplicationConfig = {
@@ -16,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations() , 
      providePrimeNG({
             theme: {
-                preset: Aura
+                preset: Aura , 
             }
         })
   ]

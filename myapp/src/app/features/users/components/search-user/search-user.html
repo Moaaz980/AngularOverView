@@ -1,0 +1,9 @@
+<div class="serach-section flex flex-col items-center justify-center gap-4 mt-9">
+    <p-floatlabel>
+        <input pInputText id="over_label" [ngModel]="username" (ngModelChange)="onUsernameChange($event)" autocomplete="off" />
+        <label for="over_label">
+            Username
+        </label>
+    </p-floatlabel>
+    <p-button label="Search" (onClick)="onClickSearch()" [disabled]="username === '' ? true : false"  />
+</div>
